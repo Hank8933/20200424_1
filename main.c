@@ -6,10 +6,9 @@
 
 char* stringCopy( char *o, char const *a )
 {
-    for(; *a != '\0'; ++o, ++a)
-        *o = *a;
-
-    return o;
+    while (*o++ = *a++);
+    //printf("%p\n",o);
+    return --o;
 }
 
 void insertspace( char *o, char const *a, int n )
@@ -17,7 +16,7 @@ void insertspace( char *o, char const *a, int n )
     memcpy(o, a, n);
     char *out = stringCopy(o + n, " ");
     out = stringCopy(out, a + n);
-    *out = '\0';
+    *out = 0;
 }
 
 char *pig (char *a, char *o, int n)  //return o
@@ -25,9 +24,7 @@ char *pig (char *a, char *o, int n)  //return o
     //printf("a = %s\n",a);
     *(a+n) = *a++;
     int i=0;
-    for (; i<n; i++){
-        *(o+i) = *(a+i);
-    }
+    for (; i<n; i++) *(o+i) = *(a+i);
     *(o+i) = 'a'; *(o+i+1) = 'y'; *(o+i+2) = 0;
     return o;
 }
@@ -49,10 +46,8 @@ int main()
         if (i == 0){
             for (;;){
                 temp = getchar();
-                if (temp != ' ' && temp != '\n'){
-                    *(t+i) = temp;
-                    i++;
-                }else {
+                if (temp != ' ' && temp != '\n') *(t+i++) = temp;
+                else {
                     *(t+i) = 0;
                     break;
                 }
